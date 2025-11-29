@@ -1,0 +1,12 @@
+{
+    "name": "simple-2d-engine",
+    "version": "0.1.0",
+    "scripts": {
+        "build": "tsc -p .",
+        "start": "npm run build && npx http-server -c-1 ."
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0",
+        "http-server": "^14.1.1"
+    }
+}
