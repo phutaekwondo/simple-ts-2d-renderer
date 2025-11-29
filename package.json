@@ -2,11 +2,14 @@
     "name": "simple-2d-engine",
     "version": "0.1.0",
     "scripts": {
-        "build": "tsc -p .",
-        "start": "npm run build && npx http-server -c-1 ."
+        "build": "tsc -p . && webpack",
+        "start": "npm run build && npx http-server -c-1 . --experimental-specifier-resolution=node"
     },
     "devDependencies": {
+        "http-server": "^14.1.1",
+        "ts-loader": "^9.5.4",
         "typescript": "^5.0.0",
-        "http-server": "^14.1.1"
+        "webpack": "^5.103.0",
+        "webpack-cli": "^6.0.1"
     }
 }
