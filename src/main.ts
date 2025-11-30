@@ -1,3 +1,4 @@
+import { Label } from "./engine/component/label";
 import { Sprite } from "./engine/component/sprite";
 import { Circle } from "./engine/graph/circle";
 import { GameLoop } from "./engine/life-cycle/game-loop";
@@ -32,19 +33,11 @@ function setupScene(root: Node)
     {
         sprite.setImage(img);
     });
-
-    const sprite2 = new Sprite();
-    sprite2.scaleX = 0.1;
-    sprite2.scaleY = 0.1;
-    sprite2.x;
-
-    loadImage("assets/ship.png").then((img) =>
-    {
-        sprite2.setImage(img);
-    });
-
     root.addChild(sprite);
-    root.addChild(sprite2);
+
+    const label = new Label();
+    label.text = "Hello, World!";
+    root.addChild(label);
 }
 
 function loadImage(src: string): Promise<HTMLImageElement>
