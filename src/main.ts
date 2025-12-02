@@ -3,6 +3,7 @@ import { GameLoop } from "./engine/life-cycle/game-loop";
 import { Node } from "./engine/node";
 import { CanvasRenderer } from "./engine/renderer/canvas-renderer";
 import { Tween } from "./engine/tween/tween";
+import { ArrowKeyControlSquare } from "./game/arrow-key-control-square";
 
 // select the canvas
 const canvas = document.getElementById("app") as HTMLCanvasElement;
@@ -24,6 +25,9 @@ function setupScene(root: Node)
 
     root.addChild(leftCircle);
     root.addChild(rightCircle);
+
+    const controlSquare = new ArrowKeyControlSquare();
+    root.addChild(controlSquare);
 
     Tween.instance.to(rightCircle, { duration: 2, targets: { x: 200, scaleX: 1.2 } });
 }
