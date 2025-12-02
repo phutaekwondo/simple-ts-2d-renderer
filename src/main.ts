@@ -1,9 +1,8 @@
-import { Label } from "./engine/component/label";
-import { Sprite } from "./engine/component/sprite";
 import { Circle } from "./engine/graph/circle";
 import { GameLoop } from "./engine/life-cycle/game-loop";
 import { Node } from "./engine/node";
 import { CanvasRenderer } from "./engine/renderer/canvas-renderer";
+import { Tween } from "./engine/tween/tween";
 
 // select the canvas
 const canvas = document.getElementById("app") as HTMLCanvasElement;
@@ -24,20 +23,9 @@ function setupScene(root: Node)
     rightCircle.x = 50
 
     root.addChild(leftCircle);
-    leftCircle.addChild(rightCircle);
+    root.addChild(rightCircle);
 
-    const sprite = new Sprite();
-    sprite.scaleX = 0.2;
-    sprite.scaleY = 0.2;
-    loadImage("assets/ship.png").then((img) =>
-    {
-        sprite.setImage(img);
-    });
-    root.addChild(sprite);
-
-    const label = new Label();
-    label.text = "Hello, World!";
-    root.addChild(label);
+    Tween.instance.to(rightCircle, { duration: 2, targets: { x: 200, scaleX: 1.2 } });
 }
 
 function loadImage(src: string): Promise<HTMLImageElement>
