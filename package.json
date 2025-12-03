@@ -3,6 +3,9 @@
     "version": "0.1.0",
     "scripts": {
         "lint": "tsc --noEmit",
+        "copyAssets": "node copy-assets-to-dist.js",
+        "build": "vite build && npm run copyAssets",
+        "serve": "vite serve dist",
         "dev": "vite"
     },
     "devDependencies": {
