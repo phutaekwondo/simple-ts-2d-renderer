@@ -6,6 +6,7 @@ export class TweenTo implements TweenItem
     private sources: { [key: string]: number } = {};
     private passedTime: number = 0;
     private isStopped: boolean = false;
+    private remainRepeats: number = 0;
 
     constructor(
         private object: any,
@@ -13,6 +14,7 @@ export class TweenTo implements TweenItem
     )
     {
         const targets = options.targets;
+        this.remainRepeats = options.repeat ?? 0;
         const keys = Object.keys(targets);
         for (const key of keys)
         {
@@ -30,9 +32,21 @@ export class TweenTo implements TweenItem
         this.updateObjectByProgress(progress);
 
         this.passedTime = currentTime;
+        const isComplete = this.passedTime >= this.options.duration;
+        const isLastRepeat = this.remainRepeats === 0;
 
-        const result = this.passedTime >= this.options.duration ? TweenUpdateResult.Completed : TweenUpdateResult.InProgress;
-        return result;
+        if (isComplete && !isLastRepeat)
+        {
+            this.passedTime = 0;
+            this.remainRepeats > 0 && this.remainRepeats--;
+        }
+
+        if (isComplete && isLastRepeat)
+        {
+            return TweenUpdateResult.Completed;
+        }
+
+        return TweenUpdateResult.InProgress;
     }
 
     private updateObjectByProgress(progress: number)

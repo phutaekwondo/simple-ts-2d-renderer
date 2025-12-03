@@ -11,6 +11,7 @@ export interface TweenOptions
     ease?: EaseFn;
     onComplete?: () => void;
     onUpdate?: (progress: number) => void;
+    repeat?: number; // number of times to repeat, 0 = no repeat, -1 = infinite
 
     targets: { [key: string]: number };
 }
