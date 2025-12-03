@@ -1,3 +1,4 @@
+import { AudioPlayer } from "./engine/audio/audio-player";
 import { Circle } from "./engine/graph/circle";
 import { GameLoop } from "./engine/life-cycle/game-loop";
 import { Node } from "./engine/node";
@@ -9,12 +10,15 @@ import { ArrowKeyControlSquare } from "./game/arrow-key-control-square";
 const canvas = document.getElementById("app") as HTMLCanvasElement;
 if (!canvas) throw new Error("No canvas element with id 'app' found.");
 
+const sfxPlayer = new AudioPlayer();
+const musicPlayer = new AudioPlayer();
 const renderer = new CanvasRenderer(canvas, { width: 600, height: 400 });
 const root = new Node();
 setupScene(root);
 
 const loop = new GameLoop(renderer, root);
 loop.start();
+
 
 function setupScene(root: Node)
 {
@@ -30,6 +34,10 @@ function setupScene(root: Node)
     root.addChild(controlSquare);
 
     Tween.instance.to(rightCircle, { duration: 2, targets: { x: 200, scaleX: 1.2 } });
+
+    const buttonSfx = new Audio("./assets/sfx-button.mp3");
+    const bgm = new Audio("./assets/bgm.mp3");
+    musicPlayer.play(bgm, true);
 }
 
 function loadImage(src: string): Promise<HTMLImageElement>
