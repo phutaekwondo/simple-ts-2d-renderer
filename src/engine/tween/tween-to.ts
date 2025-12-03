@@ -41,8 +41,11 @@ export class TweenTo implements TweenItem
             this.remainRepeats > 0 && this.remainRepeats--;
         }
 
+        this.options.onUpdate?.(progress);
+
         if (isComplete && isLastRepeat)
         {
+            this.options.onComplete?.();
             return TweenUpdateResult.Completed;
         }
 
