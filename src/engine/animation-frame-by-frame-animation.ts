@@ -15,7 +15,7 @@ export class FrameByFrameAnimation extends Sprite
             targets: { frame: frameAmount - 1 },
             duration,
             repeat,
-            onUpdate: (progress: number) =>
+            onUpdate: (_progress: number) =>
             {
                 this.onFrame(Math.floor(tweenObject.frame));
             }
